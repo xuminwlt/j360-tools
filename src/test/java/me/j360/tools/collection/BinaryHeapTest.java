@@ -16,7 +16,7 @@ public class BinaryHeapTest {
     private static BinaryHeap<Long> binaryHeap;
     private static Long start = System.currentTimeMillis();
     static {
-        binaryHeap = new BinaryHeap<Long>(1000, Comparator.naturalOrder());
+        binaryHeap = new BinaryHeap<Long>(1000, Comparator.comparing(Long::longValue));
         binaryHeap.add(start);
     }
 

@@ -1,4 +1,16 @@
 
+1. 在String中使用KMP算法计算部分操作
+2. JMH验证
+3. 常规自定义线程池如何确定Queue的使用,依据是什么
+4. 二叉堆实现有序队列
+5. 解读ThreadLocal
+6. Java中的排序场景,Collections.sort, TreeMap
+7. 线程生命周期各状态在jstack中的解读
+8. String.intern, Long, Integer等对象池在dump中的查看
+9. finalize,phantomReference使用场景
+10. 验证hash、一致性hash的分布
+
+
 
 ```
 # Measurement: 2 iterations, 1 s each

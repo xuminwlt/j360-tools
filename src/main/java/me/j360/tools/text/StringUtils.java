@@ -2,7 +2,7 @@ package me.j360.tools.text;
 
 /**
  * @author: min_xu
- * 说明：
+ * 说明：基于KMP算法验证字符串的部分操作性能
  */
 
 public class StringUtils {

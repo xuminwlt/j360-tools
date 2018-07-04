@@ -24,7 +24,7 @@ public class ArrayUtils {
         return array;
     }
 
-    public static Object get(Class clazz, Object[] objects, int index) throws ArrayIndexOutOfBoundsException{
+    public static Object get(Class clazz, Object[] objects, int index) {
         Object array = Array.newInstance(clazz, objects.length);
         int length = Array.getLength(array);
         if (length <= index) {

@@ -17,4 +17,10 @@ public class StringUtilsTest {
         int result = StringUtils.indexOf("StringUtilsTest", "sTe");
         assertThat(result).isEqualTo(10);
     }
+
+    @Test
+    public void indexOf2() {
+        int result = StringUtils.indexOf("StringUtilsTest", "abaabaca");
+        assertThat(result).isEqualTo(0);
+    }
 }

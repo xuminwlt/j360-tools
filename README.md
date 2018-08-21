@@ -18,6 +18,8 @@ j360-tools Java知识点持续更新
 11. shutdown pool时的规则, shutdown() && shutdownnow()
 12. 算法,sort/search/rate limit/sliding window
 13. 索引,B-tree、invert index
+14. 对象头、指针、锁 class相关
+
 
 
 ## 提高篇

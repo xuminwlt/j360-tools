@@ -5,9 +5,9 @@ j360-tools Java知识点持续更新
 
 ## 基础篇
 
-1. 在String中使用KMP算法计算部分操作
-2. JMH验证
-3. 线程池如何用好/shutdown pool时的规则, shutdown() && shutdownnow()
+1. <a href="#1"></a>在String中使用KMP算法计算部分操作</a>
+2. <a href="#1">JMH验证</a>
+3. <a href="#3">线程池如何用好/shutdown pool时的规则, shutdown() && shutdownnow()</a>
 4. 二叉堆实现有序队列
 5. 解读ThreadLocal
 6. Java中的排序场景,Collections.sort, TreeMap
@@ -82,7 +82,7 @@ ToolsBenchmark.indexOfString          thrpt    2  2957587.750          ops/ms
 ToolsBenchmark.indexOfStringLongText  thrpt    2  1171034.703          ops/ms
 ```
 
-### 3. 理解线程池,用好线程池
+### <a name="3">3. 理解线程池,用好线程池</a>
 
 从使用到深入了解自定义线程池ThreadPoolExecutor,先了解最完整的构造方法参数,一共7个参数
 

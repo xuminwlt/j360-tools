@@ -21,6 +21,6 @@ public class StringUtilsTest {
     @Test
     public void indexOf2() {
         int result = StringUtils.indexOf("StringUtilsTest", "abaabaca");
-        assertThat(result).isEqualTo(0);
+        assertThat(result).isEqualTo(-1);
     }
 }

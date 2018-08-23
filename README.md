@@ -5,20 +5,20 @@ j360-tools Java知识点持续更新
 
 ## 基础篇
 
-1. <a href="#1"></a>在String中使用KMP算法计算部分操作</a>
-2. <a href="#1">JMH验证</a>
-3. <a href="#3">线程池如何用好/shutdown pool时的规则, shutdown() && shutdownnow()</a>
-4. 二叉堆实现有序队列
-5. 解读ThreadLocal
-6. Java中的排序场景,Collections.sort, TreeMap
-7. 线程生命周期各状态在jstack中的解读
-8. String.intern, Long, Integer等对象池在jvm中使用
-9. finalize,phantomReference使用
-10. 验证hash、一致性hash的分布(murmurhash)
-11. 算法,sort/search/rate limit/sliding window
-12. 索引,B-tree、invert index
-13. 对象头、指针、锁、类
-14. SecureRandom seed相关
+1. <a href="#1.1">在String中使用KMP算法计算部分操作</a>
+2. <a href="#1.1">JMH验证</a>
+3. <a href="#1.3">线程池如何用好/shutdown pool时的规则, shutdown() && shutdownnow()</a>
+4. <a href="#1.4">二叉堆实现有序队列</a>
+5. <a href="#1.5">解读ThreadLocal</a>
+6. <a href="#1.6">Java中的排序场景,Collections.sort, TreeMap</a>
+7. <a href="#1.7">线程生命周期各状态在jstack中的解读</a>
+8. <a href="#1.8">String.intern, Long, Integer等对象池在jvm中使用</a>
+9. <a href="#1.9">finalize,phantomReference使用</a>
+10. <a href="#1.10">验证hash、一致性hash的分布(murmurhash)</a>
+11. <a href="#1.11">算法,sort/search/rate limit/sliding window</a>
+12. <a href="#1.12">索引,B-tree、invert index</a>
+13. <a href="#1.13">对象头、指针、锁、类</a>
+14. <a href="#1.14">SecureRandom seed相关</a>
 
 
 ## 提高篇
@@ -35,6 +35,7 @@ j360-tools Java知识点持续更新
 2. 句柄调整 ulimit -n
 3. netstat 状态解读
 4. crontab 简单搞定定时器,备份日志、mysql、任务执行调度
+5. Mysql连接池的痛
 
 
 ## 常用中间件工具篇
@@ -59,7 +60,11 @@ https://github.com/xuminwlt/j360-book-list
 
 ## 问题笔记
 
-### 1. KMP算法+JMH验证
+-------------------------------------------------------------------------------
+基础篇
+-------------------------------------------------------------------------------
+
+### <a name="1.1">1. KMP算法+JMH验证</a>
 
 ```
 # Measurement: 2 iterations, 1 s each
@@ -82,7 +87,7 @@ ToolsBenchmark.indexOfString          thrpt    2  2957587.750          ops/ms
 ToolsBenchmark.indexOfStringLongText  thrpt    2  1171034.703          ops/ms
 ```
 
-### <a name="3">3. 理解线程池,用好线程池</a>
+### <a name="1.3">3. 理解线程池,用好线程池</a>
 
 从使用到深入了解自定义线程池ThreadPoolExecutor,先了解最完整的构造方法参数,一共7个参数
 
@@ -222,7 +227,7 @@ ForkJoinPool使用work-stealing工作方式,由事件驱动,并支持1.8+lambda�
     }
 ```
 
-### 4. 二叉堆
+### <a name="1.4">4. 二叉堆</a>
 
 二叉堆是有序队列场景常用的数据结构,Java的有序队列使用的就是二叉堆PriorityQueue
 
@@ -231,7 +236,7 @@ ForkJoinPool使用work-stealing工作方式,由事件驱动,并支持1.8+lambda�
     Array.sort使用TimSort进行排序,除非用户指定使用mergeSort
     TimSort,来源于Python,使用优化过的二分插入排序
 
-### 5. ThreadLocal
+### <a name="1.5">5. ThreadLocal</a>
 
 ThreadLocal是本地线程对象,在几乎所有的中间件框架中都有定义,通常用于存取当前线程的一些本地状态,比如slf4j中的MDC,Trace中的Tracer,各种容器中的Context上下文对象
 ThreadLocal是如何做到的?
@@ -276,13 +281,13 @@ ThreadLocalMap使用ThreadLocal的弱引用作为key，如果一个ThreadLocal�
  1. 使用static的ThreadLocal，延长了ThreadLocal的生命周期，可能导致的内存泄漏（参考ThreadLocal 内存泄露的实例分析）。
  2. 分配使用了ThreadLocal又不再调用get(),set(),remove()方法，那么就会导致内存泄漏。
 
-### 6. 排序相关
+### <a name="1.6">6. 排序相关</a>
 
 Collections.sort:参考4
 TreeMap/TreeSet中的Tree是红黑树的实现的排序方式,参考红黑树原理,红黑树在1.8+ HashMap/ConcurrentHashMap中的某些条件下链表会转化成红黑树,提升性能
 LinkedHashMap使用的是顺序而不是排序,顺序方式为链表
 
-### 7. jstack
+### <a name="1.7">7. jstack</a>
    
    - 1. synchronize锁下拿到锁的线程占据了cpu控制权,其他等待锁的block阻塞
    - 2. 在1情况下的线程如果执行wait或者wait(time),则有条件出让锁和cpu资源,竞争2线程拿到锁,,1线程wait状态,等待2线程notify
@@ -388,7 +393,7 @@ LinkedHashMap使用的是顺序而不是排序,顺序方式为链表
    
    ```
    
-### 8. String池、自动装箱缓存池
+### <a name="1.8">8. String池、自动装箱缓存池</a>
 
 String的池化是通过原生方法intern()来进行的,使用方式为new String().intern()来实现对象池的功能,该处是否应该翻译为常量池我认为是有争议的,常量池一般理解为存放在方法区,然而1.7+之后的String的池化操作是作为对象一样存放在堆中。
 String.intern是一个原生方法,在底层的C++操作中,JVM为生成一个HashTable数据结构来作为String的缓存池,key为String的hashcode
@@ -432,7 +437,7 @@ private static class LongCache {
 
 参考: https://blog.csdn.net/chengzhezhijian/article/details/9628251
 
-### 9. Finalize
+### <a name="1.9">9. Finalize</a>
 
 - RunFinalize.java
 - PhantomReference: 在垃圾回收时收到一个系统通知
@@ -523,7 +528,7 @@ Heap
 ```
 
 
-### 10. hash,一致性hash
+### <a name="1.10">10. hash,一致性hash</a>
 
 hash在日常使用中有很多相关的场景和工具,比如MD5、SHA1/256/512等等,Java中常见的hash就是每个Object对象的hashcode,他们的作用只有一个就是对一个数据进行某种算法后得到一个确定的分散的值,俗称散列。
 常见的散列算法都能实现散列的均匀分布,当分布中的某些区间因为某些情况需要变更时,就存在容错性和扩展性方面的欠缺了,这些场景大量用在分布式的场景中,此时就需要使用一致性hash算法来完成。
@@ -534,17 +539,22 @@ hash在日常使用中有很多相关的场景和工具,比如MD5、SHA1/256/512
     
 参考: http://calvin1978.blogcn.com/articles/murmur.html
 
-### 11. 海量处理处理结构
+### <a name="1.11">11. 海量处理处理结构</a>
 
-分而治之/hash映射 + hash统计 + 堆/快速/归并排序；
-双层桶划分
-Bloom filter/Bitmap；
-Trie树(字典树)/数据库/倒排索引；
-外排序；
-分布式处理之Hadoop/Mapreduce。
+ - 分而治之/hash映射 + hash统计 + 堆/快速/归并排序
+ - 双层桶划分
+ - Bloom filter/Bitmap
+ - Trie树(字典树)/数据库/倒排索引
+ - 外排序
+ - 分布式处理之Hadoop/Mapreduce
+ 
+ 
+
+### <a name="1.12">12.索引,B-tree、invert index</a>
 
 
-### 13. 对象头、指针、锁、类
+
+### <a name="1.13">13. 对象头、指针、锁、类</a>
 
 先从Synchronize关键字来看
 synchronized 关键字是解决并发问题常用解决方案，有以下三种使用方式:
@@ -556,13 +566,14 @@ synchronized 关键字是解决并发问题常用解决方案，有以下三种�
 参考: https://github.com/crossoverJie/JCSprout/blob/master/MD/Synchronize.md
 
 
-### 14. SecureRandom seed相关
+### <a name="1.14">14. SecureRandom seed相关</a>
 
 
 参考: http://calvin1978.blogcn.com/articles/securerandom.html
 
----
-第二章
+
+-------------------------------------------------------------------------------
+提高篇
 -------------------------------------------------------------------------------
 
 ### 1. 事务,分布式事务,Innodb实现

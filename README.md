@@ -15,11 +15,12 @@ j360-tools Java知识点持续更新
 8. <a href="#1.8">String.intern, Long, Integer等对象池在jvm中使用</a>
 9. <a href="#1.9">finalize,phantomReference使用</a>
 10. <a href="#1.10">验证hash、一致性hash的分布(murmurhash)</a>
-11. <a href="#1.11">算法,sort/search/rate limit/sliding window</a>
+11. <a href="#1.11">算法:sort/search/rate limit/sliding window</a>
 12. <a href="#1.12">索引,B-tree、invert index</a>
 13. <a href="#1.13">对象头、指针、锁、类</a>
 14. <a href="#1.14">SecureRandom seed相关</a>
-
+15. <a href="#1.15">异常</a>
+16. <a href="#1.16">异步 & Future</a>
 
 ## 提高篇
 
@@ -35,7 +36,9 @@ j360-tools Java知识点持续更新
 2. 句柄调整 ulimit -n
 3. netstat 状态解读
 4. crontab 简单搞定定时器,备份日志、mysql、任务执行调度
-5. Mysql连接池的痛
+5. Mysql连接池
+6. Java服务化shell
+7. 日志利器sed、awk
 
 
 ## 常用中间件工具篇
@@ -47,6 +50,7 @@ j360-tools Java知识点持续更新
 5. Azkaban
 6. Apollo
 7. Zabbix/Kibana/Grafana
+8. ActiveMQ
 
 ## 容器篇
 
@@ -539,8 +543,13 @@ hash在日常使用中有很多相关的场景和工具,比如MD5、SHA1/256/512
     
 参考: http://calvin1978.blogcn.com/articles/murmur.html
 
-### <a name="1.11">11. 海量处理处理结构</a>
+### <a name="1.11">11. 算法:sort/search/sliding window/rate limit</a>
+ - TODO
 
+https://blog.csdn.net/wdscq1234/article/details/52444277
+http://yunchow.iteye.com/blog/2277593
+
+#### 海量处理处理结构
  - 分而治之/hash映射 + hash统计 + 堆/快速/归并排序
  - 双层桶划分
  - Bloom filter/Bitmap
@@ -550,7 +559,7 @@ hash在日常使用中有很多相关的场景和工具,比如MD5、SHA1/256/512
  
  
 
-### <a name="1.12">12.索引,B-tree、invert index</a>
+### <a name="1.12">12.索引,B-tree、invert index、GeoHash</a>
 
 
 

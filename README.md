@@ -563,6 +563,7 @@ http://yunchow.iteye.com/blog/2277593
 
 
 
+
 ### <a name="1.13">13. 对象头、指针、锁、类</a>
 
 先从Synchronize关键字来看

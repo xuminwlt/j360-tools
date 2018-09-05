@@ -544,11 +544,19 @@ hash在日常使用中有很多相关的场景和工具,比如MD5、SHA1/256/512
 参考: http://calvin1978.blogcn.com/articles/murmur.html
 
 ### <a name="1.11">11. 算法:sort/search/sliding window/rate limit</a>
- - TODO
+ - 排序算法:插入排序、希尔排序、选择排序、堆排序、冒泡排序、快速排序、归并排序、基数排序
+ - 查找算法:顺序查找、二分查找、插值查找、斐波那契查找、树表查找、分块查找、哈希查找
+ 
+    https://www.cnblogs.com/maybe2030/p/4715042.html
+    http://www.cnblogs.com/maybe2030/p/4715035.html
+ 
+ 滑动窗口:
+    https://blog.csdn.net/wdscq1234/article/details/52444277
+    http://yunchow.iteye.com/blog/2277593
 
-https://blog.csdn.net/wdscq1234/article/details/52444277
-http://yunchow.iteye.com/blog/2277593
-
+ 限流:
+    
+    
 #### 海量处理处理结构
  - 分而治之/hash映射 + hash统计 + 堆/快速/归并排序
  - 双层桶划分
@@ -559,9 +567,9 @@ http://yunchow.iteye.com/blog/2277593
  
  
 
-### <a name="1.12">12.索引,B-tree、invert index、GeoHash</a>
-
-
+### <a name="1.12">12.索引:B-tree、invert index、GeoHash</a>
+ 
+ - TODO
 
 
 ### <a name="1.13">13. 对象头、指针、锁、类</a>
@@ -578,8 +586,15 @@ synchronized 关键字是解决并发问题常用解决方案，有以下三种�
 
 ### <a name="1.14">14. SecureRandom seed相关</a>
 
-
 参考: http://calvin1978.blogcn.com/articles/securerandom.html
+
+### <a name="1.15">15. 异常</a>
+
+ 
+
+
+### <a name="1.16">16. 异步</a>
+
 
 
 -------------------------------------------------------------------------------

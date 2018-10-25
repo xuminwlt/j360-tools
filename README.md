@@ -21,6 +21,8 @@ j360-tools Java知识点持续更新
 14. <a href="#1.14">SecureRandom seed相关</a>
 15. <a href="#1.15">异常</a>
 16. <a href="#1.16">异步 & Future</a>
+17. <a href="#1.17">ForkJoin工作原理</a>
+18. <a href="#1.18">nio对照阻塞io写法,Selector工作原理</a>
 
 ## 提高篇
 
@@ -29,6 +31,7 @@ j360-tools Java知识点持续更新
 3. CAP
 4. redis & cluster
 5. JVM,Hotspot/JPDA/JVMTI相关 参考https://www.ibm.com/developerworks/cn/java/j-lo-jpda3/index.html / http://calvin1978.blogcn.com/articles/jvmoption-7.html
+6. NIO在工程中的高效使用
 
 ## 运维篇
 
@@ -446,6 +449,11 @@ private static class LongCache {
 - RunFinalize.java
 - PhantomReference: 在垃圾回收时收到一个系统通知
 
+#### 直接内存的回收
+
+Cleaner是PhantomReference的子类，并通过自身的next和prev字段维护的一个双向链表。PhantomReference的作用在于跟踪垃圾回收过程，并不会对对象的垃圾回收过程造成任何的影响。
+
+
 复写
 - vm 
 -verbose:gc  -Xloggc:gc_%p.log -XX:+PrintGC -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintHeapAtGC -XX:+PrintGCTimeStamps -XX:+PrintTenuringDistribution -XX:+PrintGCApplicationStoppedTime
@@ -464,6 +472,7 @@ private static class LongCache {
 https://www.jianshu.com/p/9d2788fffd5f
 http://www.cnblogs.com/jqyp/archive/2010/11/27/1889414.html
 http://zhang-xzhi-xjtu.iteye.com/blog/413159
+
 
 
 ```
@@ -590,11 +599,21 @@ synchronized 关键字是解决并发问题常用解决方案，有以下三种�
 
 ### <a name="1.15">15. 异常</a>
 
+ 异常在Java中常见的关键字有: Throwable Throw Throws Error Exception
+ 异常相关的内容:
+ - 异常类的设计
+ - 如何设计异常、抛出异常、捕获异常
+ - 如何用好异常
  
-
-
+#### 异常类的设计
+ 
+ 理解异常类的源码和设计对异常的使用有很大的帮助,Throwable是异常的顶级类,封装了异常相关的数据结构和常用方法
+ 
+ 
+ 
 ### <a name="1.16">16. 异步</a>
 
+ 
 
 
 -------------------------------------------------------------------------------

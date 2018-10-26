@@ -17,6 +17,7 @@ Log4j2 2.9.0+
 
 - ByteBuffer
 - RandomAccessFile
+- LMAX Disruptor
 
 ## 写日志过程
 
@@ -42,11 +43,59 @@ Log4j2 2.9.0+
 - 再次判断是否满足刷盘条件
 - 刷盘
 
+### 异步
+
+异步(AsyncAppender)是建立在底层Appender上面的一个组合型Appender,使用队列来实现异步任务的存储和分发,异步操作在大部分场景下可以明显提高日志吞吐量,在log4j中的配置项是队列的选择
+默认使用:ArrayBlockingQueue
+
+```
+Log4j-2.9 and higher require disruptor-3.3.4.jar or higher on the classpath. Prior to Log4j-2.9, disruptor-3.0.0.jar or higher was required.
+https://logging.apache.org/log4j/2.x/manual/async.html
+
+```
+LMAX Disruptor
+
+需要配置对应的asyncLoggerRingBufferSize,默认256 * 1024
+
 ## 实时还是吞吐量
+
 
 
 ## Location信息
 
+本地信息需要耗费大量的性能和时间代价,所以线上环境中,尽量取消本地信息获取
+同步环境:1.3-5倍时长
+异步环境:30-100倍时长
+
+```
+If one of the layouts is configured with a location-related attribute like HTML locationInfo, or one of the patterns %C or $class, %F or %file, %l or %location, %L or %line, %M or %method, Log4j will take a snapshot of the stack, and walk the stack trace to find the location information.
+
+This is an expensive operation: 1.3 - 5 times slower for synchronous loggers. Synchronous loggers wait as long as possible before they take this stack snapshot. If no location is required, the snapshot will never be taken.
+
+However, asynchronous loggers need to make this decision before passing the log message to another thread; the location information will be lost after that point. The performance impact of taking a stack trace snapshot is even higher for asynchronous loggers: logging with location is 30-100 times slower than without location. For this reason, asynchronous loggers and asynchronous appenders do not include location information by default.
+
+You can override the default behaviour in your logger or asynchronous appender configuration by specifying includeLocation="true".
+```
 
 ## WebApp
 
+WebApp环境下需要考虑到当前Servlet版本,3.0+/2.5有着不同的配置
+在Web环境下需要考虑到引入log4j2-web.jar,从而更好的得到Contailer而不是JVM的启动和结束的事件
+log4j2-web在Servlet3.0中使用标准的Log4jServletContainerInitializer来监听(Log4jServletContextListener)容器的生命周期,特别是异步环境下的刷盘机制防止日志丢失尤为重要
+
+
+## Multi JVMs
+
+FileAppender
+
+使用多jvm操作文件必须使用locking配置,但是会显著影响性能
+
+```
+locking	boolean	
+When set to true, I/O operations will occur only while the file lock is held allowing FileAppenders in multiple JVMs and potentially multiple hosts to write to the same file simultaneously. This will significantly impact performance so should be used carefully. Furthermore, on many systems the file lock is "advisory" meaning that other applications can perform operations on the file without acquiring a lock. The default value is false.
+
+share特性(同RandomAccessFileAppender)
+two web applications in a servlet container can have their own configuration and safely write to the same file if Log4j is in a ClassLoader that is common to both of them.
+```
+
+RandomAccessFileAppender不支持多JVMs操作同一个文件

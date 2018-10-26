@@ -31,7 +31,8 @@ j360-tools Java知识点持续更新
 3. CAP
 4. redis & cluster
 5. JVM,Hotspot/JPDA/JVMTI相关 参考https://www.ibm.com/developerworks/cn/java/j-lo-jpda3/index.html / http://calvin1978.blogcn.com/articles/jvmoption-7.html
-6. NIO在工程中的高效使用
+6. Netty/Selector在工程中的高效使用
+7. <a href="./docs/log4j2.md">Log4j2的高效使用</a>
 
 ## 运维篇
 

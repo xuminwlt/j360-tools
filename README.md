@@ -50,11 +50,15 @@ j360-tools Java知识点持续更新
 1. elasticsearch
 2. canal
 3. flume/fluentd
-4. zipkin/brave
+4. zipkin/brave/Skywalking
 5. Azkaban
 6. Apollo
 7. Zabbix/Kibana/Grafana
 8. ActiveMQ
+9. <a href="./docs/rocketmq.md">RocketMQ</a>
+10. Dubbo
+11. Sharding-Sphare
+12. Saga
 
 ## 容器篇
 
@@ -66,7 +70,17 @@ j360-tools Java知识点持续更新
 
 https://github.com/xuminwlt/j360-book-list
 
-## 问题笔记
+## 业务篇
+
+1. Timeline
+2. 消息、推送系统
+3. 用户
+4. 支付
+5. 计数器
+
+## 问题排查篇
+
+
 
 -------------------------------------------------------------------------------
 基础篇

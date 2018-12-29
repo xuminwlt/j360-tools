@@ -33,7 +33,7 @@ j360-tools Java知识点持续更新
 5. JVM,Hotspot/JPDA/JVMTI相关 参考https://www.ibm.com/developerworks/cn/java/j-lo-jpda3/index.html / http://calvin1978.blogcn.com/articles/jvmoption-7.html
 6. Netty/Selector在工程中的高效使用
 7. <a href="./docs/log4j2.md">Log4j2的高效使用</a>
-
+8. <a href="./docs/HikariCP.md">HikariCP 解读、译文</a>
 ## 运维篇
 
 1. coredump segmentfault https://www.cnblogs.com/lidabo/p/5014710.html
@@ -79,6 +79,9 @@ https://github.com/xuminwlt/j360-book-list
 5. 计数器
 
 ## 问题排查篇
+
+
+## 开发小技巧篇
 
 
 

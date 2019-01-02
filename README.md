@@ -26,7 +26,7 @@ j360-tools Java知识点持续更新
 
 ## 提高篇
 
-1. 事务,分布式事务,Innodb实现
+1. <a href="./docs/Transaction.md">事务,分布式事务,Innodb实现</a>
 2. 一致性hash分片、扩容与缩服
 3. CAP
 4. redis & cluster
@@ -57,7 +57,7 @@ j360-tools Java知识点持续更新
 8. ActiveMQ
 9. <a href="./docs/rocketmq.md">RocketMQ</a>
 10. Dubbo
-11. Sharding-Sphare
+11. Sharding-Sphere
 12. Saga
 
 ## 容器篇

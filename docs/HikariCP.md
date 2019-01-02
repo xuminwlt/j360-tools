@@ -1,5 +1,5 @@
 
-# 兔子洞看看 - HikariCP如何做到高出其他线程池百倍千倍的性能测试数据
+# 入兔穴,得真经 - HikariCP如何做到高出其他线程池百倍千倍的性能测试数据
 
 <a href="https://github.com/brettwooldridge/HikariCP">官网: https://github.com/brettwooldridge/HikariCP</a>
 
@@ -22,6 +22,9 @@
 - ThreadLocal缓存
 - 队列窃取
 - 交付优化
+
+Source Code:
+https://github.com/brettwooldridge/HikariCP/blob/dev/src/main/java/com/zaxxer/hikari/util/ConcurrentBag.java
 
 
 ### Invocation: invokevirtual vs invokestatic

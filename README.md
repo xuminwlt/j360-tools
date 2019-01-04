@@ -30,8 +30,11 @@ j360-tools Java知识点持续更新
 2. 一致性hash分片、扩容与缩服
 3. CAP
 4. redis & cluster
-5. JVM <a href="VmFlagsFinal.md">VMFlags</a>, Hotspot/JPDA/JVMTI相关 参考https://www.ibm.com/developerworks/cn/java/j-lo-jpda3/index.html / http://calvin1978.blogcn.com/articles/jvmoption-7.html
-6. Netty/Selector在工程中的高效使用
+5. JVM <a href="VmFlagsFinal.md">VMFlags</a>, Hotspot/JPDA/JVMTI相关 参考: 
+    - https://www.ibm.com/developerworks/cn/java/j-lo-jpda3/index.html 
+    - http://calvin1978.blogcn.com/articles/jvmoption-7.html
+    
+6. Netty/Selector在工程中的高效使用 <a href="./docs/netty.md">Netty案例</a>
 7. <a href="./docs/log4j2.md">Log4j2的高效使用</a>
 8. <a href="./docs/HikariCP.md">HikariCP 解读、译文</a>
 

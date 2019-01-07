@@ -655,6 +655,10 @@ synchronized 关键字是解决并发问题常用解决方案，有以下三种�
          }
          System.out.println(System.currentTimeMillis()  - start);
  ```
+
+#### JVM相同异常抛出限制
+ 
+ -XX:-OmitStackTraceInFastThrow
  
 ### <a name="1.16">16. 异步</a>
 

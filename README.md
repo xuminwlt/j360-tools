@@ -631,7 +631,30 @@ synchronized 关键字是解决并发问题常用解决方案，有以下三种�
  
  理解异常类的源码和设计对异常的使用有很大的帮助,Throwable是异常的顶级类,封装了异常相关的数据结构和常用方法
  
+#### 业务统一的输出异常
  
+ 使用静态异常,使用clone和消除异常trace,能够大幅度提高业务异常在系统中的性能。
+ ```
+ long start = (System.currentTimeMillis());
+         BizException bizException = BizException.bizException;
+         System.out.println(System.currentTimeMillis()  - start);
+         for (int i= 0;i < 1000; i++) {
+             try {
+                 throw bizException.clone(DefaultErrorCode.SYS_ERROR);
+             } catch (Exception e) {
+                 //System.out.println(e);
+             }
+         }
+         System.out.println(System.currentTimeMillis()  - start);
+         for (int i= 0;i < 1000; i++) {
+             try {
+                 throw new BizException(DefaultErrorCode.SYS_ERROR);
+             } catch (Exception e) {
+                 //System.out.println(e);
+             }
+         }
+         System.out.println(System.currentTimeMillis()  - start);
+ ```
  
 ### <a name="1.16">16. 异步</a>
 

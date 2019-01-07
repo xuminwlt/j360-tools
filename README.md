@@ -633,7 +633,10 @@ synchronized 关键字是解决并发问题常用解决方案，有以下三种�
  
 #### 业务统一的输出异常
  
- 使用静态异常,使用clone和消除异常trace,能够大幅度提高业务异常在系统中的性能。
+ 使用静态异常,使用clone和消除异常trace,能够大幅度提高业务异常在系统中的性能。参考 
+ 
+  - 源码: https://github.com/xuminwlt/j360-disboot-all/blob/master/j360-disboot-base/src/main/java/me/j360/disboot/base/exception/BizException.java
+  - test: https://github.com/xuminwlt/j360-disboot-all/blob/master/j360-disboot-base/src/test/java/me/j360/disboot/BizExceptionTest.java
  ```
  long start = (System.currentTimeMillis());
          BizException bizException = BizException.bizException;
@@ -654,6 +657,10 @@ synchronized 关键字是解决并发问题常用解决方案，有以下三种�
              }
          }
          System.out.println(System.currentTimeMillis()  - start);
+         
+          -> 3
+          -> 13
+          -> 71
  ```
 
 #### JVM相同异常抛出限制

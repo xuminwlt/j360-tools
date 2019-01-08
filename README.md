@@ -669,6 +669,7 @@ synchronized 关键字是解决并发问题常用解决方案，有以下三种�
  
 ### <a name="1.16">16. 异步</a>
 
+ jdk1.8 AsyncClass/AIO
  
 
 

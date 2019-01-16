@@ -1,10 +1,17 @@
+## Undo核心逻辑与实现
+
+UndoLog的组成结构:表Metadata+BeforeImage+AfterImage+LockKey
 
 ![Undo入口](./images/fescar/undo-in.png)
 
+Undo在执行中的实现顺序
+
 ![Undo镜像生成](./images/fescar/undo-image.png)
 
+BeforeImage镜像数据获取方式
 ![Undo前置镜像](./images/fescar/undo-before.png)
 
+镜像在undo_log保存的方式
 ![Undo存储格式](./images/fescar/undo-log.png)
 
 ## 关于ReadUnCommit
@@ -37,6 +44,9 @@
 - XID=1 A 生成购买订单 失败,回滚,全局事务回滚
 
 当资源被共享或者该资源更新依赖了可能存在他人更新的数据时,务必使用读已提交,并且需要注意性能问题。乐观锁方案在此处无效。
+
+读已提交在Fescar中的实现
+Fescar在这里使用资源Lock冲突实现,当读去一条数据时,如果全局事务存在该条数据的资源锁存在时,则说明该处资源被占用,需要读取被修改之前的数据。该数据保存在Undo逻辑中
 
 ## 可重复读 Mysql InnoDB MVCC
 

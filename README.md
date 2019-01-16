@@ -26,7 +26,9 @@ j360-tools Java知识点持续更新
 
 ## 提高篇
 
-1. <a href="./docs/Transaction.md">事务,分布式事务,Innodb实现</a>
+1. 事务,分布式事务,Innodb实现
+    - <a href="./docs/Transaction.md">事务,分布式事务,Innodb实现</a>
+    - <a href="./docs/Transaction-Fescar.md">分布式事务Alibaba Fescar实现</a>
 2. 一致性hash分片、扩容与缩服
 3. CAP
 4. redis & cluster
@@ -679,5 +681,5 @@ synchronized 关键字是解决并发问题常用解决方案，有以下三种�
 
 ### 1. 事务,分布式事务,Innodb实现
 
-<a href="./docs/Transaction.md">事务,分布式事务,Innodb实现</a>
-<a href="./docs/Transaction-Fescar.md">分布式事务Alibaba Fescar实现</a>
+- <a href="./docs/Transaction.md">事务,分布式事务,Innodb实现</a>
+- <a href="./docs/Transaction-Fescar.md">分布式事务Alibaba Fescar实现</a>

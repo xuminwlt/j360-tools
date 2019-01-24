@@ -52,3 +52,10 @@ Fescar在这里使用资源Lock冲突实现,当读去一条数据时,如果全�
 ## 使用前提
 
 Fescar需要确保本地RM是具备ACID的数据库实例, 如果本地事务存在多库插入则需要二次拆分多条本地事务
+
+
+## 核心解读
+com.alibaba.fescar.rm.datasource.DataSourceProxy
+
+DataSourceProxy作为某个单一本地事务数据库代理,最小的代理单元是Datasource, 分库情况下数据代理到所有的数据库,当发生多个库提交动作,分别会有多个RM存在
+

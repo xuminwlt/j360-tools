@@ -55,4 +55,15 @@ public class MethodInoveBenchmark {
         }
     }
 
+    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+    @BenchmarkMode(Mode.AverageTime)
+    @Benchmark
+    @SneakyThrows
+    public void cgilib2() {
+        PreparedStatement preparedStatement = new PreparedStatement();
+        for (int i = 0 ;i <= 10000 ; i++) {
+            JdbcFastMethodInvocation actual = new JdbcFastMethodInvocation(JdbcFastMethodInvocation.get(PreparedStatement.class.getMethod("setObject", int.class, Object.class)), new Object[] {1, 100});
+            actual.invoke(preparedStatement);
+        }
+    }
 }

@@ -31,6 +31,11 @@ public class JdbcFastMethodInvocation {
         return fastClz.getMethod(method);
     }
 
+    private static FastClass fastClz = FastClass.create(PreparedStatement.class);
+    public static FastMethod get(Method method) {
+        return fastClz.getMethod(method);
+    }
+
     @Getter
     private final FastMethod method;
     

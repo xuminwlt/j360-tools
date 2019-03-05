@@ -3,6 +3,11 @@ j360-tools Java知识点持续更新
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![Build Status](https://travis-ci.org/xuminwlt/j360-tools.svg?branch=master)](https://travis-ci.org/xuminwlt/j360-tools)
 
+
+## 书单篇
+
+<a href="https://github.com/xuminwlt/j360-book-list">2019春眠篇</a>
+
 ## 基础篇
 
 1. <a href="#1.1">在String中使用KMP算法计算部分操作</a>
@@ -49,6 +54,7 @@ j360-tools Java知识点持续更新
 5. Mysql连接池
 6. Java服务化shell
 7. 日志利器sed、awk
+8. Nginx常用配置及优化手段
 
 
 ## 常用中间件工具篇

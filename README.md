@@ -12,7 +12,7 @@ j360-tools Java知识点持续更新
 
 1. <a href="#1.1">在String中使用KMP算法计算部分操作</a>
 2. <a href="#1.1">JMH验证</a>
-3. <a href="#1.3">线程池如何用好/shutdown pool时的规则, shutdown() && shutdownnow()</a>
+3. <a href="#1.3">线程池如何用好/shutdown pool时的规则, shutdown() && shutdownnow(), kill和钩子引用</a>
 4. <a href="#1.4">二叉堆实现有序队列</a>
 5. <a href="#1.5">解读ThreadLocal</a>
 6. <a href="#1.6">Java中的排序场景,Collections.sort, TreeMap</a>
@@ -25,7 +25,7 @@ j360-tools Java知识点持续更新
 13. <a href="#1.13">对象头、指针、锁、类</a>
 14. <a href="#1.14">SecureRandom seed相关</a>
 15. <a href="#1.15">异常</a>
-16. <a href="#1.16">异步 & Future</a>
+16. <a href="#1.16">异步 & Future, 并发异步读提升接口性能</a>
 17. <a href="#1.17">ForkJoin工作原理</a>
 18. <a href="#1.18">nio对照阻塞io写法,Selector工作原理</a>
 

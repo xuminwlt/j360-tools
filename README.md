@@ -54,7 +54,7 @@ j360-tools Java知识点持续更新
 5. Mysql连接池
 6. Java服务化shell
 7. 日志利器sed、awk
-8. Nginx常用配置及优化手段
+8. <a href="docs/nginx.md">Nginx常用配置及优化手段</a>
 
 
 ## 常用中间件工具篇

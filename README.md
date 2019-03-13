@@ -44,6 +44,7 @@ j360-tools Java知识点持续更新
 6. Netty/Selector在工程中的高效使用 <a href="./docs/netty.md">Netty案例</a>
 7. <a href="./docs/log4j2.md">Log4j2的高效使用</a>
 8. <a href="./docs/HikariCP.md">HikariCP 解读、译文</a>
+9. Web服务会话管理实现
 
 ## 运维篇
 

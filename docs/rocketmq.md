@@ -1,10 +1,29 @@
-RocketMQ
+RocketMQ 细枝末节
+
+## 注意事项
+
+1. 高可用问题
+2. 重复消费问题
+3. 消息存储问题
+4. 重试规则
+5. 消费消费推拉问题
+6. 消息顺序性和定时性
+
+## 服务注册
+
+1. NameSrv -> Brokers 每10s扫描一次
+2. Brokers -> NameSrv 每30s发送一次心跳, NameSrv 120没有收到心跳,则移除Broker
+
+## 消息发送
+
+
+
 
 ## 存储服务
 
 1. Broker接收消息, 存入commitQueue
-2. 同步或者异步刷盘进入commitLog
-3. 异步写入indexFile和consumerQueue
+2. 同步或者异步刷盘进入commitLog, CommitLog异步刷盘分为是否开启TransientStorePoll启用DirectByteBuffer缓存,再对MappedByteBuffer刷盘
+3. 异步写入indexFile和consumerQueue, 存储方式类似CommitLog
 4. 返回生产者结果
 
 文件存储部分RocketMQ使用MappedFile和IndexFile进行管理
@@ -16,7 +35,14 @@ RocketMQ
 3. 流控: 消费数量、消费间隔
 4. 每5s轮训、消息到达唤醒两种模式,存在并发请求拉取的过程,通过同步锁控制并发问题,通过长轮训实现准实时消费
 5. 默认20s执行一次消息队列负载的重新分布
-6. 
+
+### 定时消息服务
+
+定时消息按照定时配置维护多个定时队列, 在定时方式上采用固定时间Timer启动定时任务, 消息在某个定时任务上存在不精确的问题, 所以定时消息服务一般用在对时间不明感的场景, 时间延迟存在以下3个方面
+
+1. 任务固定时间Timer执行的延迟
+2. 延迟队列消息排队造成的延迟
+3. 延迟任务消息回写到正常Topic时排队造成的延迟
 
 ## 消费读分离
 

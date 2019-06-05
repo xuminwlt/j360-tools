@@ -157,3 +157,16 @@ TC控制所有Branch提交和回滚
 2. undo过程中发生的table表结构变化问题?
 3. 如何确保RM中的业务success、fail和undo逻辑宕机问题?
 
+猜测:
+补偿通过事务反向回查实现最终一致性补偿。
+
+
+对话作者:
+https://mp.weixin.qq.com/s?__biz=MzU4NzU0MDIzOQ==&mid=2247485437&idx=1&sn=e2fa8769966468faa63f1eeba7ec646c&chksm=fdeb359dca9cbc8b71a48fb6e127af57097a9eed5b6318fbced19f88d053af1ae1ddfcb74d8a&scene=21#wechat_redirect
+
+```
+Q9：因网络中断、网张闪断、节点宕机和超时等引起的异常，Fescar会提供相应的补偿措施么？
+
+A9：这些异常情况的处理是分布式事务解决方案的基本要求，Fescar 同样也是提供了整套方案来处理各类异常场景。这方面的具体机制会在 HA Cluster 版本发布时，给出全面的分析介绍。
+
+```

@@ -42,6 +42,9 @@ String checkSQL = String.format(CHECK_SQL_TEMPLATE, sqlUndoLog.getTableName(), p
 ```
 beforeImage:
 根据主键PK+update columns进行log保存,此处做到了按需存储undo
+afterImage: 
+同理实现方式,获取最后的undo信息
+在执行update钱通过checkSql方式检查是否需要执行undo逻辑,比如update没有任何数据情况,则跳过
 ```
 public static TableRecords buildRecords(TableMeta tmeta, ResultSet resultSet) throws SQLException {
         TableRecords records = new TableRecords(tmeta);
@@ -96,3 +99,61 @@ public static TableRecords buildRecords(TableMeta tmeta, ResultSet resultSet) th
      */
     public static final String RETRY_ROLLBACKING_SESSION_MANAGER_NAME = "retry.rollback.data";
 ```
+
+
+## 通信连接相关
+
+1. TC和TM/RM只通讯存储事务元数据和锁相关关键数据
+2. RM undoLog保存于本机文件或者数据库中
+
+lockKeys
+模拟数据库行锁设计的PK
+```
+ /**
+     * build lockKey
+     *
+     * @param rowsIncludingPK the records
+     * @return the string
+     */
+    protected String buildLockKey(TableRecords rowsIncludingPK) {
+        if (rowsIncludingPK.size() == 0) {
+            return null;
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append(rowsIncludingPK.getTableMeta().getTableName());
+        sb.append(":");
+        int filedSequence = 0;
+        for (Field field : rowsIncludingPK.pkRows()) {
+            sb.append(field.getValue());
+            filedSequence++;
+            if (filedSequence < rowsIncludingPK.pkRows().size()) {
+                sb.append(",");
+            }
+        }
+        return sb.toString();
+    }
+```
+
+## 集群相关
+
+Server集群部署
+
+
+## 最终一致性检查
+
+A -> B -> C -> D
+
+B success
+C success
+1. D fail 发生宕机, undo未回滚, 如何判断失败
+2. D success 发生宕机, undo未删除, 如何判断成功
+
+TM控制事务提交和回滚
+TC控制所有Branch提交和回滚
+
+
+**Q&A**
+1. RM undoLog是否应该和业务BizDB在一台数据库上面?
+2. undo过程中发生的table表结构变化问题?
+3. 如何确保RM中的业务success、fail和undo逻辑宕机问题?
+

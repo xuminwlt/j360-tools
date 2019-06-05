@@ -63,7 +63,7 @@ j360-tools Java知识点持续更新
 1. elasticsearch
 2. canal
 3. flume/fluentd
-4. zipkin/brave/Skywalking
+4. <a href="./docs/TRACING.md">zipkin/brave/Skywalking</a>
 5. Azkaban
 6. Apollo
 7. Zabbix/Kibana/Grafana

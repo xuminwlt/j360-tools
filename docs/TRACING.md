@@ -58,6 +58,8 @@ https://github.com/apache/skywalking/blob/master/docs/en/setup/service-agent/jav
 2. 如何支持跨线程问题
 https://github.com/apache/skywalking/blob/master/docs/en/setup/service-agent/java-agent/Application-toolkit-trace-cross-thread.md
 
+3. 如何自定义行为的范围
+https://github.com/apache/skywalking/blob/master/docs/en/setup/service-agent/java-agent/Customize-enhance-trace.md
 
 https://github.com/apache/skywalking/blob/master/docs/en/setup/README.md
 

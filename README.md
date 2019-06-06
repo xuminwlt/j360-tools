@@ -56,7 +56,7 @@ j360-tools Java知识点持续更新
 6. Java服务化shell
 7. 日志利器sed、awk
 8. <a href="docs/nginx.md">Nginx常用配置及优化手段</a>
-9. redis: master/slave,cluster
+9. <a href="docs/redis.md">redis: master/slave,cluster</a>
 
 
 ## 常用中间件工具篇
@@ -74,6 +74,7 @@ j360-tools Java知识点持续更新
 11. Sharding-Sphere
 12. Saga
 13. Kafka
+14. <a href="./docs/seata.md">Seata</a>
 
 ## 容器篇
 

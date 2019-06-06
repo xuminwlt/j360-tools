@@ -78,7 +78,7 @@ https://github.com/apache/skywalking/issues/2653
 - v6.3.2
 - 10.1.2.159:5601
 
-3. skywalking backend(UI+OAP)
+3. skywalking 6.1 backend(UI+OAP)
 
 定义storage为elasticsearch
 

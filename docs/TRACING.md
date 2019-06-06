@@ -63,3 +63,73 @@ https://github.com/apache/skywalking/blob/master/docs/en/setup/service-agent/jav
 
 https://github.com/apache/skywalking/blob/master/docs/en/setup/README.md
 
+4. zipkin -> skywalking
+https://github.com/apache/skywalking/issues/2653
+
+## 实战案例
+
+**准备阶段**
+
+1. elasticsearch 
+- v6.3.2   v6.8+ v7.0+不支持
+- host: 10.1.4.19:9200
+
+2. kibana 
+- v6.3.2
+- 10.1.2.159:5601
+
+3. skywalking backend(UI+OAP)
+
+定义storage为elasticsearch
+
+```
+storage:
+  elasticsearch:
+    nameSpace: ${SW_NAMESPACE:""}
+    clusterNodes: ${SW_STORAGE_ES_CLUSTER_NODES:localhost:9200}
+#    user: ${SW_ES_USER:""}
+#    password: ${SW_ES_PASSWORD:""}
+    indexShardsNumber: ${SW_STORAGE_ES_INDEX_SHARDS_NUMBER:2}
+    indexReplicasNumber: ${SW_STORAGE_ES_INDEX_REPLICAS_NUMBER:0}
+#    # Batch process setting, refer to https://www.elastic.co/guide/en/elasticsearch/client/java-api/5.5/java-docs-bulk-processor.html
+    bulkActions: ${SW_STORAGE_ES_BULK_ACTIONS:2000} # Execute the bulk every 2000 requests
+    bulkSize: ${SW_STORAGE_ES_BULK_SIZE:20} # flush the bulk every 20mb
+    flushInterval: ${SW_STORAGE_ES_FLUSH_INTERVAL:10} # flush the bulk every 10 seconds whatever the number of requests
+    concurrentRequests: ${SW_STORAGE_ES_CONCURRENT_REQUESTS:2} # the number of concurrent requests
+    metadataQueryMaxSize: ${SW_STORAGE_ES_QUERY_MAX_SIZE:5000}
+    segmentQueryMaxSize: ${SW_STORAGE_ES_QUERY_SEGMENT_SIZE:200}
+```
+
+4. applications(spring boot) + agent shell
+
+- 定义5个微服务模块
+
+```
+-rw-r--r-- 1 root root 2047 6月   3 17:12 agent.config
+-rw-r--r-- 1 root root 2035 6月   6 11:25 agent_game.config
+-rw-r--r-- 1 root root 2035 6月   6 11:25 agent_order.config
+-rw-r--r-- 1 root root 2035 6月   6 11:25 agent_pay.config
+-rw-r--r-- 1 root root 2037 6月   4 11:44 agent_product.config
+-rw-r--r-- 1 root root 2035 6月   3 18:23 agent_user.config
+```
+
+- 定义shell启动入口 -agent
+
+```
+-javaagent:/data/agent/skywalking-agent.jar
+-Dskywalking_config=/data/agent/config/{agent_module}.config  #根据微服务名称定义
+```
+
+**监控阶段**
+
+1. Skywalking Server工作台
+![Server工作台](./images/sw/skywalking-server.png)
+
+2. 工作台中展示的微服务拓扑图
+![微服务拓扑图](./images/sw/microservice.jpg)
+
+3. 链路树的展示
+![链路树](./images/sw/urltrace.jpg)
+
+4. 生产以ES作为存储时的数据管理
+![存储管理](./images/sw/kibana-sw.jpg)

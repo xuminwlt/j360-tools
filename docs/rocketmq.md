@@ -54,6 +54,14 @@ RocketMQ 细枝末节
 
 RocketMQ4.4提供了事务消息回查机制, 通过两阶段提交方式实现事务功能, prepare阶段提交事务消息到半消息队列后, 默认服务器每1分钟定时回查client端询问业务事务是否完成提交, 如果提交成功,则半消息提交到正式消息
 
+
+
+##Q&A
+
+1. RocketMQ消费服务会把整个队列Queue中的所有数据一并拉取, 在Consumer中针对Tag进行过滤, 所以在一个vm中, 尽量保证一个Topic使用一个Consumer实例
+2. 
+
+
 - MappedFile.java
 
 ```

@@ -66,6 +66,10 @@ https://github.com/apache/skywalking/blob/master/docs/en/setup/README.md
 4. zipkin -> skywalking
 https://github.com/apache/skywalking/issues/2653
 
+
+5. 其他指标
+监控数据与时序数据库
+
 ## 实战案例
 
 **准备阶段**

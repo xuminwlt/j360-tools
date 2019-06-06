@@ -8,7 +8,7 @@ j360-tools Java知识点持续更新
 
 ## 书单篇
 
-<a href="https://github.com/xuminwlt/j360-book-list">我的书单: 2019春眠篇</a>
+<a href="https://github.com/xuminwlt/j360-book-list">我的书单: 2019夏至篇</a>
 
 ## 基础篇
 
@@ -51,7 +51,7 @@ j360-tools Java知识点持续更新
 ## 运维篇
 
 1. coredump segmentfault https://www.cnblogs.com/lidabo/p/5014710.html
-2. 句柄调整 ulimit -n
+2. 句柄、TCP/内核相关调整 ulimit -n
 3. netstat 状态解读
 4. crontab 简单搞定定时器,备份日志、mysql、任务执行调度
 5. Mysql连接池

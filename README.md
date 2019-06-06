@@ -4,9 +4,11 @@ j360-tools Java知识点持续更新
 [![Build Status](https://travis-ci.org/xuminwlt/j360-tools.svg?branch=master)](https://travis-ci.org/xuminwlt/j360-tools)
 
 
+**开源爱好者, 善于Java体系微服务架构和运维优化, 学而思, 思而学, 分享一下工作中使用的技术点, 会持续更新**
+
 ## 书单篇
 
-<a href="https://github.com/xuminwlt/j360-book-list">2019春眠篇</a>
+<a href="https://github.com/xuminwlt/j360-book-list">我的书单: 2019春眠篇</a>
 
 ## 基础篇
 
@@ -96,8 +98,17 @@ https://github.com/xuminwlt/j360-book-list
 
 ## 问题排查篇
 
+1. 慢接口
+2. GC
+3. Mysql死锁
+
 
 ## 开发小技巧篇
+
+1. 分布式锁
+2. Master-Slave
+3. 限流
+4. 热点数据
 
 
 

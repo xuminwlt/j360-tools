@@ -4,7 +4,7 @@ j360-tools Java知识点持续更新
 [![Build Status](https://travis-ci.org/xuminwlt/j360-tools.svg?branch=master)](https://travis-ci.org/xuminwlt/j360-tools)
 
 
-**开源爱好者, 善于Java体系微服务架构和运维优化, 学而思, 思而学, 分享一下工作中使用的技术点, 会持续更新**
+**Java体系微服务架构和运维优化, 学而思, 思而学, 分享一下工作中使用的技术点, 会持续更新**
 
 ## 书单篇
 
@@ -74,7 +74,7 @@ j360-tools Java知识点持续更新
 9. <a href="./docs/rocketmq.md">RocketMQ v4.3.0</a>
 10. Dubbo
 11. Sharding-Sphere
-12. Saga
+12. Saga <a href="https://github.com/apache/servicecomb-pack">servicecomb-pack</a>
 13. Kafka
 14. <a href="./docs/seata.md">Seata</a>
 

@@ -3,11 +3,18 @@ j360-tools Java知识点持续更新
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![Build Status](https://travis-ci.org/xuminwlt/j360-tools.svg?branch=master)](https://travis-ci.org/xuminwlt/j360-tools)
 
+
+**Java体系微服务架构和运维优化, 学而思, 思而学, 分享一下工作中使用的技术点, 会持续更新**
+
+## 书单篇
+
+<a href="https://github.com/xuminwlt/j360-book-list">我的书单: 2019夏至篇</a>
+
 ## 基础篇
 
 1. <a href="#1.1">在String中使用KMP算法计算部分操作</a>
 2. <a href="#1.1">JMH验证</a>
-3. <a href="#1.3">线程池如何用好/shutdown pool时的规则, shutdown() && shutdownnow()</a>
+3. <a href="#1.3">线程池如何用好/shutdown pool时的规则, shutdown() && shutdownnow(), kill和钩子引用</a>
 4. <a href="#1.4">二叉堆实现有序队列</a>
 5. <a href="#1.5">解读ThreadLocal</a>
 6. <a href="#1.6">Java中的排序场景,Collections.sort, TreeMap</a>
@@ -20,25 +27,38 @@ j360-tools Java知识点持续更新
 13. <a href="#1.13">对象头、指针、锁、类</a>
 14. <a href="#1.14">SecureRandom seed相关</a>
 15. <a href="#1.15">异常</a>
-16. <a href="#1.16">异步 & Future</a>
+16. <a href="#1.16">异步 & Future, 并发异步读提升接口性能</a>
+17. <a href="#1.17">ForkJoin工作原理</a>
+18. <a href="#1.18">nio对照阻塞io写法,Selector工作原理</a>
 
 ## 提高篇
 
 1. 事务,分布式事务,Innodb实现
+    - <a href="./docs/Transaction.md">事务,分布式事务,Innodb实现,分布式事务案例分析</a>
+    - <a href="./docs/Transaction-Fescar.md">分布式事务Alibaba Fescar实现</a>
 2. 一致性hash分片、扩容与缩服
 3. CAP
 4. redis & cluster
-5. JVM,Hotspot/JPDA/JVMTI相关 参考https://www.ibm.com/developerworks/cn/java/j-lo-jpda3/index.html / http://calvin1978.blogcn.com/articles/jvmoption-7.html
+5. JVM <a href="VmFlagsFinal.md">VMFlags</a>, Hotspot/JPDA/JVMTI相关 参考: 
+    - https://www.ibm.com/developerworks/cn/java/j-lo-jpda3/index.html 
+    - http://calvin1978.blogcn.com/articles/jvmoption-7.html
+    
+6. Netty/Selector在工程中的高效使用 <a href="./docs/netty.md">Netty案例</a>
+7. <a href="./docs/log4j2.md">Log4j2的高效使用</a>
+8. <a href="./docs/HikariCP.md">HikariCP 解读、译文</a>
+9. Web服务会话管理实现
 
 ## 运维篇
 
 1. coredump segmentfault https://www.cnblogs.com/lidabo/p/5014710.html
-2. 句柄调整 ulimit -n
+2. 句柄、TCP/内核相关调整 ulimit -n
 3. netstat 状态解读
 4. crontab 简单搞定定时器,备份日志、mysql、任务执行调度
 5. Mysql连接池
 6. Java服务化shell
 7. 日志利器sed、awk
+8. <a href="docs/nginx.md">Nginx常用配置及优化手段</a>
+9. <a href="docs/redis.md">redis: master/slave,cluster</a>
 
 
 ## 常用中间件工具篇
@@ -46,11 +66,17 @@ j360-tools Java知识点持续更新
 1. elasticsearch
 2. canal
 3. flume/fluentd
-4. zipkin/brave
+4. <a href="./docs/TRACING.md">zipkin/brave/Skywalking</a>
 5. Azkaban
 6. Apollo
 7. Zabbix/Kibana/Grafana
 8. ActiveMQ
+9. <a href="./docs/rocketmq.md">RocketMQ v4.3.0</a>
+10. Dubbo
+11. Sharding-Sphere
+12. Saga <a href="https://github.com/apache/servicecomb-pack">servicecomb-pack</a>
+13. Kafka
+14. <a href="./docs/seata.md">Seata</a>
 
 ## 容器篇
 
@@ -62,7 +88,29 @@ j360-tools Java知识点持续更新
 
 https://github.com/xuminwlt/j360-book-list
 
-## 问题笔记
+## 业务篇
+
+1. Timeline
+2. 消息、推送系统
+3. 用户
+4. 支付
+5. 计数器
+
+## 问题排查篇
+
+1. 慢接口
+2. GC
+3. Mysql死锁
+
+
+## 开发小技巧篇
+
+1. 分布式锁
+2. Master-Slave
+3. 限流
+4. 热点数据
+
+
 
 -------------------------------------------------------------------------------
 基础篇
@@ -446,6 +494,11 @@ private static class LongCache {
 - RunFinalize.java
 - PhantomReference: 在垃圾回收时收到一个系统通知
 
+#### 直接内存的回收
+
+Cleaner是PhantomReference的子类，并通过自身的next和prev字段维护的一个双向链表。PhantomReference的作用在于跟踪垃圾回收过程，并不会对对象的垃圾回收过程造成任何的影响。
+
+
 复写
 - vm 
 -verbose:gc  -Xloggc:gc_%p.log -XX:+PrintGC -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintHeapAtGC -XX:+PrintGCTimeStamps -XX:+PrintTenuringDistribution -XX:+PrintGCApplicationStoppedTime
@@ -464,6 +517,7 @@ private static class LongCache {
 https://www.jianshu.com/p/9d2788fffd5f
 http://www.cnblogs.com/jqyp/archive/2010/11/27/1889414.html
 http://zhang-xzhi-xjtu.iteye.com/blog/413159
+
 
 
 ```
@@ -544,11 +598,19 @@ hash在日常使用中有很多相关的场景和工具,比如MD5、SHA1/256/512
 参考: http://calvin1978.blogcn.com/articles/murmur.html
 
 ### <a name="1.11">11. 算法:sort/search/sliding window/rate limit</a>
- - TODO
+ - 排序算法:插入排序、希尔排序、选择排序、堆排序、冒泡排序、快速排序、归并排序、基数排序
+ - 查找算法:顺序查找、二分查找、插值查找、斐波那契查找、树表查找、分块查找、哈希查找
+ 
+    https://www.cnblogs.com/maybe2030/p/4715042.html
+    http://www.cnblogs.com/maybe2030/p/4715035.html
+ 
+ 滑动窗口:
+    https://blog.csdn.net/wdscq1234/article/details/52444277
+    http://yunchow.iteye.com/blog/2277593
 
-https://blog.csdn.net/wdscq1234/article/details/52444277
-http://yunchow.iteye.com/blog/2277593
-
+ 限流:
+    
+    
 #### 海量处理处理结构
  - 分而治之/hash映射 + hash统计 + 堆/快速/归并排序
  - 双层桶划分
@@ -559,9 +621,9 @@ http://yunchow.iteye.com/blog/2277593
  
  
 
-### <a name="1.12">12.索引,B-tree、invert index、GeoHash</a>
-
-
+### <a name="1.12">12.索引:B-tree、invert index、GeoHash</a>
+ 
+ - TODO
 
 
 ### <a name="1.13">13. 对象头、指针、锁、类</a>
@@ -578,8 +640,60 @@ synchronized 关键字是解决并发问题常用解决方案，有以下三种�
 
 ### <a name="1.14">14. SecureRandom seed相关</a>
 
-
 参考: http://calvin1978.blogcn.com/articles/securerandom.html
+
+### <a name="1.15">15. 异常</a>
+
+ 异常在Java中常见的关键字有: Throwable Throw Throws Error Exception
+ 异常相关的内容:
+ - 异常类的设计
+ - 如何设计异常、抛出异常、捕获异常
+ - 如何用好异常
+ 
+#### 异常类的设计
+ 
+ 理解异常类的源码和设计对异常的使用有很大的帮助,Throwable是异常的顶级类,封装了异常相关的数据结构和常用方法
+ 
+#### 业务统一的输出异常
+ 
+ 使用静态异常,使用clone和消除异常trace,能够大幅度提高业务异常在系统中的性能。参考 
+ 
+  - 源码: https://github.com/xuminwlt/j360-disboot-all/blob/master/j360-disboot-base/src/main/java/me/j360/disboot/base/exception/BizException.java
+  - test: https://github.com/xuminwlt/j360-disboot-all/blob/master/j360-disboot-base/src/test/java/me/j360/disboot/BizExceptionTest.java
+ ```
+ long start = (System.currentTimeMillis());
+         BizException bizException = BizException.bizException;
+         System.out.println(System.currentTimeMillis()  - start);
+         for (int i= 0;i < 1000; i++) {
+             try {
+                 throw bizException.clone(DefaultErrorCode.SYS_ERROR);
+             } catch (Exception e) {
+                 //System.out.println(e);
+             }
+         }
+         System.out.println(System.currentTimeMillis()  - start);
+         for (int i= 0;i < 1000; i++) {
+             try {
+                 throw new BizException(DefaultErrorCode.SYS_ERROR);
+             } catch (Exception e) {
+                 //System.out.println(e);
+             }
+         }
+         System.out.println(System.currentTimeMillis()  - start);
+         
+          -> 3
+          -> 13
+          -> 71
+ ```
+
+#### JVM相同异常抛出限制
+ 
+ -XX:-OmitStackTraceInFastThrow
+ 
+### <a name="1.16">16. 异步</a>
+
+ jdk1.8 AsyncClass/AIO
+ 
 
 
 -------------------------------------------------------------------------------
@@ -588,3 +702,5 @@ synchronized 关键字是解决并发问题常用解决方案，有以下三种�
 
 ### 1. 事务,分布式事务,Innodb实现
 
+- <a href="./docs/Transaction.md">事务,分布式事务,Innodb实现</a>
+- <a href="./docs/Transaction-Fescar.md">分布式事务Alibaba Fescar实现</a>
